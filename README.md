@@ -170,6 +170,30 @@ neither could be: both belong to one install and one game version. Later starts 
 
 Start SteamVR first, then the game.
 
+### Linux: Proton with WiVRn
+
+For a Quest connected through WiVRn, its bundled **xrizer** can translate this mod's OpenVR calls
+to OpenXR without starting SteamVR. This route is experimental; successful startup does not
+guarantee every menu or gameplay interaction works.
+
+Install the Windows release into the game's Steam folder, and install the **Windows x64 .NET 6
+Desktop Runtime** into the game's Proton prefix (Steam app ID `1326470`). MelonLoader also needs
+the native DLL override `WINEDLLOVERRIDES="version=n,b"`.
+
+For the **Flatpak version of WiVRn**, this repository includes `scripts/launch-wivrn.sh`. Make it
+executable and set the game's Steam launch options to the following, using your actual checkout path:
+
+```sh
+/path/to/SonsVR_Mod/scripts/launch-wivrn.sh %command%
+```
+
+The wrapper selects WiVRn's bundled xrizer and OpenXR runtime for this game and exposes them to
+Steam's container. Keep the checkout available at that path. Connect the headset in WiVRn before
+launching; the first launch still needs time to generate the game-specific assemblies.
+
+See the [MelonLoader Proton instructions](https://github.com/LavaGang/MelonWiki/blob/master/docs/gettingstarted.md)
+and [WiVRn's OpenVR compatibility notes](https://github.com/WiVRn/WiVRn/blob/master/docs/steamvr.md).
+
 ---
 
 ## Settings
